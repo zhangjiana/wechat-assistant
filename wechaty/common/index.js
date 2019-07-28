@@ -96,10 +96,10 @@ async function getContactTextReply(that, contact, msg) {
         if(scheduleObj.time){
           let res = await addSchedule(that,scheduleObj)
           if(res){
-            await lib.delay(2000)
+            await lib.delay(1000)
             contact.say('小助手已经把你的提醒牢记在小本本上了')
           }else{
-            await lib.delay(2000)
+            await lib.delay(1000)
             contact.say('添加提醒失败，请稍后重试')
           }
         }else{
