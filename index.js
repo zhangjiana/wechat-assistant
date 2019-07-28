@@ -84,7 +84,7 @@ onMessage = async(msg) => {
     const contact = msg.from()
     const content = msg.text()
     const room = msg.room()
-    const meiri = await bot.Room.find({ topic: '京东618互助群' })
+    const meiri = await bot.Room.find({ topic: '北京无中介租房1群' })
     if (msg.self()) return
     if (room) {
         const roomName = await room.topic()
