@@ -18,7 +18,6 @@ module.exports = {
     {
       name:'lavender',
       alias:'AAAAA',
-      memorialDay:'2015/04/18',
       city:'北京',
       endWord:'浪浪',
       date:'0 0 8 * * *'

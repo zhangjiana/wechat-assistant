@@ -14,8 +14,8 @@ initDay = async() => {
     let one = await untils.getOne() //获取每日一句
     let weather = await untils.getWeather() //获取天气信息
     let today = await untils.formatDate(new Date()) //获取今天的日期
-    let memorialDay = untils.getDay(day.MEMORIAL_DAY) //获取纪念日天数
-    let str = today + '<br>我们在一起的第' + memorialDay + '天<br>' + '<br>元气满满的一天开始啦,要开心噢^_^<br>' +
+    // let memorialDay = untils.getDay(day.MEMORIAL_DAY) //获取纪念日天数
+    let str = today + '新的一天开始啦,要开心噢^_^<br>' +
         '<br>今日天气<br>' + weather.weatherTips + '<br>' + weather.todayWeather + '<br>每日一句:<br>' + one + '<br><br>' + '————————最爱你的我'
     try {
         logMsg = str
