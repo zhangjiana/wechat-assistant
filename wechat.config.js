@@ -33,22 +33,22 @@ module.exports = {
    * date:每天定时的发送时间，案例中代表每天早上7点30分，具体规则见‘wechaty/lib/index.js’(多个群不要设置相同时间！不要设置相同时间！不要设置相同时间！)
    */
   ROOMLIST: [
-    {roomName:'群名',sortId:22,endWord:'小助手雷欧',date:'0 30 7 * * *'},
+    {roomName:'八十大寿', sortId:22, endWord:'小助手',date:'0 30 7 * * *'},
   ],
    /**
     * 自动添加好友关键词，留空代表同意任何好友请求 
     */
-  ACCEPTFRIEND: [],
+  ACCEPTFRIEND: ['租房'],
   /**
    * 好友进群通知，可配置多个
    */
-  ROOMJOINLIST: [{name:'群名',welcome:'有什么问题都可以群里提出，大家都是很热情的'}],
+  ROOMJOINLIST: [{name:'北京无中介租房群', welcome:'欢迎入群，请不要发与本群无关的消息，谢谢！'}],
   /**
    * 关键词回复列表
    * key: 多个关键词触发相同内容，非模糊匹配，为全匹配
    * reply: 回复内容
    */ 
-  KEYWORDLIST:[{key:['你好','您好'],reply:'你好啊，我是小助手雷欧'}],
+  KEYWORDLIST:[{key:['你好','您好'], reply:'你好，我是小助手柚柚'}],
   /**
    * 新通过好友，默认发送消息
    */
@@ -59,7 +59,8 @@ module.exports = {
    * roomName: 发送邀请的群名
    */
   ADDROOMKEYLIST:[
-    {key:['加群'],roomName:'群名'}
+    {key:['加群'], roomName:'京东618互助群'},
+    {key:['租房'], roomName:'北京无中介租房群'}
   ],
   /**
    * 关键词触发指定事件，适用于私聊与群聊
