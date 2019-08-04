@@ -10,7 +10,6 @@ module.exports = {
             })
         })
     },
-
     find: (conditions) => { // 获取定时任务列表
         return new Promise((resolve, reject) => {
             Assistant.find(conditions, (err, doc) => {
