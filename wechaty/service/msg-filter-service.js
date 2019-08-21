@@ -85,8 +85,8 @@ async function filterFriendMsg(msg, name, id) {
       default : break;
     }
   }
-  if (msg.includes(DELETEFRIEND) ||WEIXINOFFICIAL.includes(name) ||msg.length > 1000) {
-    console.log('字符超1000字符，或无效及官方消息，不做回复');
+  if (msg.includes(DELETEFRIEND) ||WEIXINOFFICIAL.includes(name) ||msg.length > 100) {
+    console.log('字符超100字符，或无效及官方消息，不做回复');
     obj.type ='text'
     obj.content = ''
     return obj;
