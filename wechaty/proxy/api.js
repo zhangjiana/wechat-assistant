@@ -24,6 +24,19 @@ function getUniqueId(id) {
 }
 
 /**
+ * 设置提醒人
+ */
+async function setMention(obj) {
+  try {
+    let config = {
+      method: 'POST',
+      url: apiConfig.KOAHOST + '/addMention'
+    }
+  } catch (err){
+    console.log('设置提醒失败', err)
+  }
+}
+/**
  * 设置定时提醒任务
  * @param {*} obj 任务详情
  * @returns {*} 任务详情
@@ -511,5 +524,6 @@ module.exports = {
   getLunar,
   getGoldReply,
   getXhy,
-  getRkl
+  getRkl,
+  setMention
 };
