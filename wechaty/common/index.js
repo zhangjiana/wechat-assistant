@@ -97,7 +97,7 @@ async function getContactTextReply(that, contact, msg) {
           let res = await addSchedule(that,scheduleObj)
           if(res){
             await lib.delay(1000)
-            contact.say('小助手已经把你的提醒牢记在小本本上了')
+            contact.say('本助手已记下，您就瞧好吧')
           }else{
             await lib.delay(1000)
             contact.say('添加提醒失败，请稍后重试')
@@ -119,6 +119,11 @@ async function getContactTextReply(that, contact, msg) {
       return ''
     }catch(e){
       console.log(`定时任务出错，${e}`)
+    }
+  } else if(result.type == 'mention') {
+    let res = await api.setMention(that, obj)
+    if (res) {
+      contact.say('ok啦，会每天给你设置的人提醒哦')
     }
   }else if(result.type == 'event') {
     return result.content;

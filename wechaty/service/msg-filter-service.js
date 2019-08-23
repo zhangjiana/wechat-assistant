@@ -76,8 +76,8 @@ async function filterFriendMsg(msg, name, id) {
     name = msg.split(':')[0].substr(4);
     switch (type) {
       case '发消息': obj.name = name; obj.content = message; return obj;
-      case '加定时': dispatch.addSchedule(name, message); 
-                    obj.content = `给${name}${message}完毕`;
+      case '加定时': obj.type = 'mention';
+                    obj.content = message;
                     return obj;
       case '关定时': dispatch.shutDownSchedule(name, message);
                     obj.content = `给${name}${message}完毕`;
