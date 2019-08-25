@@ -5,7 +5,6 @@ const WEIXINOFFICIAL = ['朋友推荐消息', '微信支付', '微信运动', '�
 const DELETEFRIEND = '开启了朋友验证'; // 被人删除后，防止重复回复
 const NEWADDFRIEND = '你已添加';
 const REMINDKEY = '提醒'
-
 /**
  * 设置提醒内容解析
  * @param {*} contact 设置定时任务的用户
@@ -65,9 +64,10 @@ async function getEventReply(event,msg,name,id){
  * @returns {number} 返回回复内容
  */
 async function filterFriendMsg(msg, name, id) {
-  let obj = {type:'', content:'', event:{}}
+  let obj = { type:'', content:'', event:{} }
   // 来自主人的吩咐 格式： 发消息给XX: ^^
   // 加定时给XX: ^^
+  // 加群聊给啥群: 大是大非
   if (name === config.MASTER) {
     obj.type = 'order'
     let name, message, type;
@@ -82,6 +82,13 @@ async function filterFriendMsg(msg, name, id) {
       case '关定时': dispatch.shutDownSchedule(name, message);
                     obj.content = `给${name}${message}完毕`;
                     return obj;
+      case '加群聊': let res = await dispatch.addRoom(name, message);
+                    console.log(res);
+                    if (res.code === 200) {
+                      obj.event = '';
+                      obj.content =  `给${name}加群聊完毕`;
+                      return obj;
+                    }
       default : break;
     }
   }

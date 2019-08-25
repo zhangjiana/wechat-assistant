@@ -69,7 +69,16 @@ async function dispatchAiBot(bot, msg, name, id) {
   }
   return res;
 }
+async function addRoom(name, welcome) {
+  let config = {
+    name: name,
+    welcome: welcome
+  }
+  let res = await api.addRoom(config)
+  return res;
+}
 module.exports = {
   dispatchEventContent,
-  dispatchAiBot
+  dispatchAiBot,
+  addRoom
 };

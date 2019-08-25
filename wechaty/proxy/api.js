@@ -37,6 +37,42 @@ async function setMention(obj) {
   }
 }
 /**
+ * 获取设定的群聊
+ */
+async function getRoom() {
+  try {
+    let config = {
+      method: 'GET',
+      url: apiConfig.KOAHOST + '/queryRoom'
+    }
+    let res = await req(config);
+    let text = parseBody(res);
+    let roomList = text.data;
+    return roomList;
+  } catch (err){
+    console.log('获取设定群聊失败', err)
+  }
+}
+/**
+ * 增加设定的群聊
+ * name :
+ * welcome
+ */
+async function addRoom(obj) {
+  try {
+    let config = {
+      method: 'POST',
+      url: apiConfig.KOAHOST + '/addRoom',
+      params: obj
+    }
+    let res = await req(config);
+    let text = parseBody(res);
+    return text; 
+  } catch (err){
+    console.log('设定群聊失败', err)
+  }
+}
+/**
  * 设置定时提醒任务
  * @param {*} obj 任务详情
  * @returns {*} 任务详情
@@ -525,5 +561,7 @@ module.exports = {
   getGoldReply,
   getXhy,
   getRkl,
-  setMention
+  setMention,
+  getRoom,
+  addRoom
 };

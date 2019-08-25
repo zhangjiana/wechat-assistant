@@ -23,6 +23,10 @@ async function dispatchFriendFilterByMsgType(that, msg) {
           if(content.trim()){
             reply = await common.getContactTextReply(that,contact,content);
             console.log('回复内容',reply)
+            if (reply.type === 'order') {
+              contact.say(reply.content);
+              return;
+            }
             // 主动发消息给某人
             if (reply.name) {
               let ruleContact = await that.Contact.find({ name: reply.name });

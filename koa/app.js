@@ -3,6 +3,7 @@ const Router = require("koa-router")
 const bodyParser = require('koa-bodyparser')
 const assistant = require("./mongodb/model/assistant")
 const member = require('./mongodb/model/member')
+const room = require('./mongodb/model/room')
 
 const app = new Koa()
 const router = new Router()
@@ -42,7 +43,36 @@ router.post('/api/addMention', async(ctx, next) => {
     }
     next()
 })
-
+// 新增管理的群
+router.post('/api/addRoom', async(ctx, next) => {
+    const body = ctx.request.body;
+    let res = await room.insert(body);
+    ctx.body = {
+        code: 200,
+        msg: 'ok',
+        data: res
+    }
+    next()
+})
+// 修改管理的群
+router.post('/api/updateRoom', async(ctx, next) => {
+    const condition = { name: ctx.request.body.name }
+    let res = await room.update(condition);
+    ctx.body = {
+        code: 200,
+        msg: 'ok',
+        data: res
+    }
+    next()
+})
+// 查询管理的群
+router.get('/api/queryRoom', async(ctx, next) => {
+    // const condition = { name: false }
+    let res = await room.find({})
+    ctx.response.status = 200;
+    ctx.body = { code: 200, msg: "ok", data: res }
+    next()
+})
 const handler = async(ctx, next) => {
     try {
         await next();
