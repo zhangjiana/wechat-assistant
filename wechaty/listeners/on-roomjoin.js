@@ -21,10 +21,11 @@ async function onRoomjoin (room, inviteeList, inviter){
   let rooms = await getRoom();
   const nameList = inviteeList.map(c => c.name()).join(',')
   const roomName = await room.topic()
+  console.log(rooms);
   const roomIndex = roomHasConfig(rooms,roomName)
   if (roomIndex>-1) {
       console.log(`群名： ${roomName} ，加入新成员： ${nameList}, 邀请人： ${inviter}`)
-      room.say(`${roomName}：欢迎新朋友 @${nameList}，<br>${config.ROOMJOINLIST[roomIndex].welcome}`)
+      room.say(`${roomName}：欢迎新朋友 @${nameList}，<br>${rooms[roomIndex].welcome}`)
   }
 }
 

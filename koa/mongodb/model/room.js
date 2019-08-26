@@ -11,11 +11,19 @@ const room =  mongoose.model('roomList', roomList)
 module.exports = {
     insert: (conditions) => { // 添加定时任务
         return new Promise((resolve, reject) => {
-            room.create(conditions, (err, doc) => {
-                if (err) return reject(err)
-                console.log('创建成功', doc)
-                return resolve(doc)
-            })
+            console.log(conditions)
+            if (room.find({name: conditions.name})) {
+                room.updateOne({name: conditions.name}, { $set: {welcome: conditions.welcome} }, (err, doc) => {
+                    if (err) return reject(err)
+                    return resolve(doc)
+                })
+            } else {
+                room.create(conditions, (err, doc) => {
+                    if (err) return reject(err)
+                    console.log('创建成功', doc)
+                    return resolve(doc)
+                })
+            }
         })
     },
     find: (conditions) => { // 获取定时任务列表
