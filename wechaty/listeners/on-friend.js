@@ -14,8 +14,8 @@ async function onFriend(friendship) {
     switch (friendship.type()) {
       case Friendship.Type.Receive:
         if (config.ACCEPTFRIEND.length == 0) {
-          console.log('无认证关键词,30秒后将会自动通过好友请求')
-          await lib.delay(30000);
+          console.log('无认证关键词,5秒后将会自动通过好友请求')
+          await lib.delay(5000);
           await friendship.accept();
         } else if (config.ACCEPTFRIEND.length>0&&config.ACCEPTFRIEND.includes(hello)) {
           console.log(`触发关键词${hello},30秒后自动通过好友请求`)

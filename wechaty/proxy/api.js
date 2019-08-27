@@ -348,7 +348,7 @@ async function getNews(id) {
     let option = {
       method: 'GET',
       url: apiConfig.TXDAYNEWS,
-      params: { key: config.TXAPIKEY, num: 10, col: id }
+      params: { key: config.TXAPIKEY, num: 10 }
     };
     let res = await req(option);
     let content = parseBody(res);
