@@ -74,6 +74,7 @@ async function addRoom(name, welcome) {
     name: name,
     welcome: welcome
   }
+  console.log(config)
   let res = await api.addRoom(config)
   return res;
 }
