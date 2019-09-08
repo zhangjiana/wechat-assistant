@@ -84,7 +84,6 @@ const handler = async(ctx, next) => {
         ctx.app.emit('error', err, ctx);
     }
 }
-
 app.use(handler)
 app.on('error', (err) => {
     console.error('server error:', err)

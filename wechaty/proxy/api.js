@@ -67,7 +67,7 @@ async function addRoom(obj) {
     }
     let res = await req(config);
     let text = parseBody(res);
-    return text; 
+    return text;
   } catch (err){
     console.log('设定群聊失败', err)
   }
@@ -348,7 +348,7 @@ async function getNews(id) {
     let option = {
       method: 'GET',
       url: apiConfig.TXDAYNEWS,
-      params: { key: config.TXAPIKEY, num: 10 }
+      params: { key: config.TXAPIKEY, num: 10, col: id }
     };
     let res = await req(option);
     let content = parseBody(res);
