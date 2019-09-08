@@ -10,7 +10,7 @@ module.exports = {
   TXRUBBISH: 'http://api.tianapi.com/txapi/lajifenlei/',// 天行垃圾分类
   TXLOVE: 'http://api.tianapi.com/txapi/saylove/', // 天行土情话
   TXWEATHER: 'http://api.tianapi.com/txapi/tianqi/', // 天行天气
-  TXDAYNEWS: 'http://api.tianapi.com/mobile/',// 天行每日新闻
+  TXDAYNEWS: 'http://api.tianapi.com/allnews/',// 天行每日新闻
   TXMINGYAN: 'http://api.tianapi.com/txapi/mingyan/',// 天行名人名言
   TXSTAR: 'http://api.tianapi.com/txapi/star/',// 天行星座运势
   TXXING: 'http://api.tianapi.com/txapi/surname/',// 天行姓氏起源
