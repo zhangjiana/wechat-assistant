@@ -63,7 +63,7 @@ async function setScheduleTask(that, item) {
   let time = item.isLoop ? item.time : new Date(item.time);
   lib.setSchedule(time, async () => {
     try {
-      let contact = await that.Contact.find({ name: item.subscribe });
+      let contact = await that.Contact.find({ alias: item.subscribe }) || await that.Contact.find({ name: item.subscribe });
       console.log(`${item.subscribe}的专属提醒开启啦！`);
       await contact.say(item.content);
       if (!item.isLoop) {
