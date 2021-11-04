@@ -4,6 +4,8 @@ const bodyParser = require('koa-bodyparser')
 const assistant = require("./mongodb/model/assistant")
 const member = require('./mongodb/model/member')
 const room = require('./mongodb/model/room')
+const sport = require('./mongodb/model/sport')
+
 
 const app = new Koa()
 const router = new Router()
@@ -71,6 +73,31 @@ router.get('/api/queryRoom', async(ctx, next) => {
     let res = await room.find({})
     ctx.response.status = 200;
     ctx.body = { code: 200, msg: "ok", data: res }
+    next()
+})
+// 新增报名人员
+router.post('/api/addSportMenmber', async(ctx, next) => {
+    const body = ctx.request.body;
+    let res = await sport.insert(body);
+    ctx.response.status = 200;
+    ctx.body = { code: 200, msg: "ok", data: res }
+    next()
+})
+// 取消报名人员
+router.post('/api/delSportMenmber', async(ctx, next) => {
+    const body = ctx.request.body;
+    let res = await sport.update(body);
+    ctx.response.status = 200;
+    console.log(res)
+    ctx.body = { code: 200, msg: "ok", data: res }
+    next()
+})
+// 获取所有报名人员
+router.get('/api/getSportMenmber', async(ctx, next) => {
+    let res = await sport.findAll();
+    ctx.response.status = 200;
+    let data = res.filter((item) => item.isExit)
+    ctx.body = { code: 200, msg: "ok", data }
     next()
 })
 const handler = async(ctx, next) => {

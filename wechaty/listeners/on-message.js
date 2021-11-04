@@ -11,7 +11,7 @@ const lib = require('../lib/index');
 async function dispatchFriendFilterByMsgType(that, msg) {
   try {
     const type = msg.type();
-    const contact = msg.from(); // 发消息人
+    const contact = msg.talker(); // 发消息人
     const isOfficial = contact.type() === that.Contact.Type.Official
     let content = '';
     let reply = '';
@@ -70,7 +70,7 @@ async function dispatchFriendFilterByMsgType(that, msg) {
  */
 async function dispatchRoomFilterByMsgType(that,room, msg) {
   let startTime = new Date()
-  const contact = msg.from(); // 发消息人
+  const contact = msg.talker(); // 发消息人
   const contactName = contact.name()
   const roomName = await room.topic()
   const type = msg.type();
@@ -83,7 +83,7 @@ async function dispatchRoomFilterByMsgType(that,room, msg) {
     case that.Message.Type.Text:
       content = msg.text();
       console.log(`群名: ${roomName} 发消息人: ${contactName} 内容: ${content}`)
-      if(mentionSelf){
+      // if(mentionSelf){
         content = content.replace(/@(.+?)\s/g,'')
         reply = await common.getRoomTextReply(content,contactName,contactId);
         console.log('回复内容',reply)
@@ -91,7 +91,7 @@ async function dispatchRoomFilterByMsgType(that,room, msg) {
           await lib.delay(1000);
           room.say(`@${contactName} ${reply}`);
         }
-      }
+      // }
       break;
     case that.Message.Type.Emoticon:
         console.log(`群名: ${roomName} 发消息人: ${contactName} 发了一个表情`)
@@ -113,10 +113,10 @@ async function dispatchRoomFilterByMsgType(that,room, msg) {
 async function onMessage(msg) {
   const room = msg.room(); // 是否为群消息
   const msgSelf = msg.self(); // 是否自己发给自己的消息
-  if (msgSelf) return;
   if (room) {
     dispatchRoomFilterByMsgType(this,room,msg)
   } else {
+    if (msgSelf) return;
     dispatchFriendFilterByMsgType(this,msg)
   }
 }

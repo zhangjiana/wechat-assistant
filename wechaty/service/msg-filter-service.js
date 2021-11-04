@@ -1,6 +1,8 @@
 const config = require('../../wechat.config');
 const dispatch = require('./event-dispatch-service');
-const lib = require('../lib')
+const api = require('../proxy/api');
+const lib = require('../lib');
+const { SPORT } = require('../../wechat.config');
 const WEIXINOFFICIAL = ['朋友推荐消息', '微信支付', '微信运动', '微信团队', '文件传输助手']; // 微信官方账户，针对此账户不做任何回复
 const DELETEFRIEND = '开启了朋友验证'; // 被人删除后，防止重复回复
 const NEWADDFRIEND = '你已添加';
@@ -191,6 +193,43 @@ async function filterFriendMsg(msg, name, id) {
  */
 async function filterRoomMsg(msg,name, id) {
   let obj = {type:'',content:'',event:{}}
+  // 报名运动
+  if (config.SPORT.ENTER === msg) {
+    obj.type = 'text'
+    let res = await api.signInSport(name)
+    if (res.code !== 200) {
+      obj.content = '报名失败'
+      return obj
+    }
+    let list = await api.getSportMembers()
+    obj.content = `${name} 报名成功!
+    时间: ${lib.getNextWeekDate(1)}
+    地点: ${SPORT.PLACE},
+    已报名列表:
+    ${list.join('\n')}
+    `
+    // 报名成功的，给提示，并且带出报名列表
+    return obj;
+  }
+  // 取消报名
+  if (config.SPORT.OUT === msg) {
+    obj.type = 'text'
+    let res = await api.signOutSport(name)
+    if (res.code !== 200) {
+      obj.content = '取消报名失败'
+      return obj
+    }
+    let list = await api.getSportMembers()
+    obj.content = `${name} 报名成功!
+    时间: ${lib.getNextWeekDate(1)}
+    地点: ${SPORT.PLACE},
+    已报名列表:
+    ${list.join('\n')}
+    `
+    // 取消成功，带出报名列表
+    return obj;
+  }
+
   if (config.KEYWORDLIST && config.KEYWORDLIST.length > 0) {
     for (let item of config.KEYWORDLIST) {
       if (item.key.includes(msg)) {
@@ -201,7 +240,7 @@ async function filterRoomMsg(msg,name, id) {
       }
     }
   }
-
+//  针对提问的回复
   if (config.EVENTKEYWORDLIST && config.EVENTKEYWORDLIST.length > 0) {
     for (let item of config.EVENTKEYWORDLIST) {
       obj.type = 'event'
@@ -232,10 +271,10 @@ async function filterRoomMsg(msg,name, id) {
       }
     }
   } 
-
-  obj.type = 'text'
-  obj.content = await dispatch.dispatchAiBot(config.DEFAULTBOT,msg,name,id)
-  return obj
+  return {}
+  // obj.type = 'text'
+  // obj.content = await dispatch.dispatchAiBot(config.DEFAULTBOT,msg,name,id)
+  // return obj
 }
 
 module.exports = {

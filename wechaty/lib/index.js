@@ -180,6 +180,16 @@ function getConstellation(astro){
   }
 }
 
+// 获取下周周几的日期，number类型， 周日到周六，0-6
+function getNextWeekDate(num) {
+  let now = new Date()
+  let distanceDay = 7 - now.getDay() + num
+  now.setDate(now.getDate() + distanceDay)
+  let year = now.getFullYear()
+  let month = now.getMonth() + 1
+  let day = now.getDate()
+  return `${year}年${month}月${day}日`
+}
 module.exports = {
   setSchedule,
   delay,
@@ -188,5 +198,6 @@ module.exports = {
   getDay,
   formatDate,
   isRealDate,
-  getConstellation
+  getConstellation,
+  getNextWeekDate
 };

@@ -32,7 +32,7 @@ module.exports = {
    * date:每天定时的发送时间，案例中代表每天早上7点30分，具体规则见‘wechaty/lib/index.js’(多个群不要设置相同时间！不要设置相同时间！不要设置相同时间！)
    */
   ROOMLIST: [
-    {roomName:'阅文集团-2020年-校招内推', sortId:22, endWord:'QQ阅读君',date:'0 30 7 * * *'},
+    {roomName:'测试报名', sortId:22, endWord: 'QQ阅读君',date:'0 30 7 * * *'},
   ],
    /**
     * 自动添加好友关键词，留空代表同意任何好友请求 
@@ -47,7 +47,7 @@ module.exports = {
    * key: 多个关键词触发相同内容，非模糊匹配，为全匹配
    * reply: 回复内容
    */ 
-  KEYWORDLIST:[{key:['你好','您好'], reply:'你好，我是小助手柚柚'}],
+  KEYWORDLIST:[ {key:['你好','您好'], reply:'你好，我是报名小助手，报名请在群里输入报名即可'} ],
   /**
    * 新通过好友，默认发送消息
    */
@@ -76,4 +76,11 @@ module.exports = {
     {key:'姓',position:'start',event:'xing'},
     {key:'姓',position:'end',event:'xing'},
   ],  
+  SPORT: {
+    ENTER: '报名',
+    OUT: '取消报名',
+    TIME: '',
+    PLACE: '恒通羽毛球球馆',
+    TIPS: '活动前记得热热身哦'
+  }
 }

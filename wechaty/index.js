@@ -6,7 +6,10 @@ const onFriend = require('./listeners/on-friend')
 const onRoomjoin = require('./listeners/on-roomjoin')
 const onMessage = require('./listeners/on-message')
 
-const bot = new Wechaty({ name: 'WechatEveryDay' });
+const bot = new Wechaty({
+   name: 'WechatEveryDay',
+   puppet: 'wechaty-puppet-wechat',
+ });
 
 
 bot.on('scan', onScan);

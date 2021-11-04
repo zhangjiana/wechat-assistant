@@ -541,6 +541,50 @@ async function getRkl() {
     console.log('获取天行绕口令失败', error);
   }
 }
+async function signInSport(name) {
+  try {
+    let option = {
+      method: 'POST',
+      url: apiConfig.KOAHOST + '/addSportMenmber',
+      params: { name },
+      contentType: 'application/json;charset=UTF-8'
+    };
+    let res = await req(option);
+    let content = parseBody(res);
+    return content;
+  } catch (error) {
+    console.log('添加定时任务失败', error);
+  }
+}
+async function signOutSport(name) {
+  try {
+    let option = {
+      method: 'POST',
+      url: apiConfig.KOAHOST + '/delSportMenmber',
+      params: { name },
+      contentType: 'application/json;charset=UTF-8'
+    };
+    let res = await req(option);
+    let content = parseBody(res);
+    return content;
+  } catch (error) {
+    console.log('添加定时任务失败', error);
+  }
+}
+async function getSportMembers() {
+  try {
+    let option = {
+      method: 'GET',
+      url: apiConfig.KOAHOST + '/getSportMenmber'
+    };
+    let res = await req(option);
+    let content = parseBody(res);
+    let arr = content.data.map((item, index) => `${index + 1}、${item.name}`)
+    return arr;
+  } catch (error) {
+    console.log('添加定时任务失败', error);
+  }
+}
 module.exports = {
   getOne,
   getResByTXTL,
@@ -563,5 +607,8 @@ module.exports = {
   getRkl,
   setMention,
   getRoom,
-  addRoom
+  addRoom,
+  signInSport,
+  signOutSport,
+  getSportMembers
 };
